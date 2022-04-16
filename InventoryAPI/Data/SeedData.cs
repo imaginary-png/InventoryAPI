@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using InventoryAPI.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InventoryAPI.Data
@@ -15,32 +16,91 @@ namespace InventoryAPI.Data
             if (context.Inventory.Any())
                 return; // DB has already been seeded.
 
-            context.Customers.AddRange(
-                new Customer
+
+            var pwHasher = new PasswordHasher<Customer>();
+
+            #region creating users
+
+            var user1 = new Customer
+            {
+                Id = "CUST1000",
+                Name = "Bob",
+                Address = null,
+                PhoneNumber = "0123456789",
+                Email = "user1",
+                NormalizedEmail = "USER1"
+            };
+            user1.PasswordHash = pwHasher.HashPassword(user1, "user1");
+
+            var user2 = new Customer
+            {
+                Id = "CUST1001",
+                Name = "James",
+                Address = null,
+                Email = "user2",
+                NormalizedEmail = "USER2"
+            };
+            user2.PasswordHash = pwHasher.HashPassword(user2, "user2");
+
+            var admin = new Customer
+            {
+                Id = "ADMIN1000",
+                Name = "Alice",
+                Address = "123 fake st suburb postcode state",
+                PhoneNumber = null,
+                Email = "admin",
+                NormalizedEmail = "ADMIN"
+            };
+            admin.PasswordHash = pwHasher.HashPassword(admin, "admin");
+
+
+            #endregion
+
+            context.Users.AddRange(
+              user1, user2, admin
+            );
+
+
+            #region Adding ROLES
+
+            context.Roles.AddRange(
+                new IdentityRole
                 {
-                    CustomerID = "CUST1000",
-                    Name = "Bob",
-                    Address = null,
-                    Phone = "0123456789",
-                    Email = "123@fakeEmail.notreal"
+                    Id = "user role id",
+                    Name = "User",
+                    ConcurrencyStamp = "1",
+                    NormalizedName = "USER"
                 },
-                new Customer
+
+                new IdentityRole
                 {
-                    CustomerID = "CUST1001",
-                    Name = "James",
-                    Address = null,
-                    Phone = null,
-                    Email = null
-                },
-                new Customer
-                {
-                    CustomerID = "CUST1002",
-                    Name = "Alice",
-                    Address = "123 fake st suburb postcode state",
-                    Phone = null,
-                    Email = "456@fakeEmail.notreal"
+                    Id = "admin role id",
+                    Name = "Admin",
+                    ConcurrencyStamp = "2",
+                    NormalizedName = "ADMIN"
                 }
             );
+            //add those roles to the users
+            context.UserRoles.AddRange(
+                new IdentityUserRole<string>
+                {
+                    UserId = "CUST1000",
+                    RoleId = "user role id"
+                }, 
+                new IdentityUserRole<string>
+                {
+                    UserId = "CUST1001",
+                    RoleId = "user role id"
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = "ADMIN1000",
+                    RoleId = "admin role id"
+                }
+            );
+
+            #endregion
+
 
             context.Inventory.AddRange(
                 new InventoryItem

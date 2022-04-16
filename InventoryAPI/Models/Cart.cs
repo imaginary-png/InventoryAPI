@@ -16,7 +16,7 @@ namespace InventoryAPI.Models
         public string CartID { get; set; }
 
         [ForeignKey("Customer"), Required]
-        public string CustomerID { get; set; }
+        public string UserID { get; set; }
 
         [JsonIgnore]
         public virtual Customer Customer { get; set; }
