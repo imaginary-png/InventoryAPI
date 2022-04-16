@@ -34,7 +34,7 @@ namespace InventoryAPI.Models.Repository
                     IsAuthSuccessful = false,
                     errors = new Dictionary<string, List<string>>
                     {
-                        {"Login", new List<string>{"Incorrect login details", $"Username: userLogin.Email"}}
+                        {"Login", new List<string>{"Incorrect login details", $"Username: {userLogin.Email}"}}
                     }};
 
             if (!await _userManager.CheckPasswordAsync(user, userLogin.Password))

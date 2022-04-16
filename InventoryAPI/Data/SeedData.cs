@@ -67,17 +67,17 @@ namespace InventoryAPI.Data
                 new IdentityRole
                 {
                     Id = "user role id",
-                    Name = "User",
+                    Name = UserRoles.User,
                     ConcurrencyStamp = "1",
-                    NormalizedName = "USER"
+                    NormalizedName = UserRoles.User.ToUpper()
                 },
 
                 new IdentityRole
                 {
                     Id = "admin role id",
-                    Name = "Admin",
+                    Name = UserRoles.Admin,
                     ConcurrencyStamp = "2",
-                    NormalizedName = "ADMIN"
+                    NormalizedName = UserRoles.Admin.ToUpper()
                 }
             );
             //add those roles to the users

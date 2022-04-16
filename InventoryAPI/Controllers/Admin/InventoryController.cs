@@ -4,12 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InventoryAPI.Models;
 using InventoryAPI.Models.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryAPI.Controllers.Admin
 {
     [Route("api/Admin/[controller]")]
     [ApiController]
+    [Authorize(Roles = UserRoles.Admin)]
     public class InventoryController : ControllerBase
     {
         private IInventoryRepository _repo;
