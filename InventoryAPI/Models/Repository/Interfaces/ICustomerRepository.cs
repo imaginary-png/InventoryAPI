@@ -7,8 +7,5 @@ namespace InventoryAPI.Models.Repository.Interfaces
     public interface ICustomerRepository
     {
         Task<AuthResponseDto> Login(LoginDto userLogin);
-        void Add(InventoryItem item);
-        void Delete(InventoryItem item);
-        void ChangeQuantity(ChangeQuantityDto changeQuantity);
     }
 }
