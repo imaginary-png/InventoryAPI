@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using InventoryAPI.Models;
+﻿using InventoryAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
 
 namespace InventoryAPI.Data
 {
@@ -86,7 +86,7 @@ namespace InventoryAPI.Data
                 {
                     UserId = "CUST1000",
                     RoleId = "user role id"
-                }, 
+                },
                 new IdentityUserRole<string>
                 {
                     UserId = "CUST1001",

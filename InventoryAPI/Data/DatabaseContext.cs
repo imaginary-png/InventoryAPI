@@ -1,5 +1,4 @@
 ﻿using InventoryAPI.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,8 +29,8 @@ namespace InventoryAPI.Data
             builder.Entity<Cart>().HasMany(x => x.Items).WithOne(x => x.Cart);
 
             //setting up composite key for CartItem
-            builder.Entity<CartItem>().HasKey(x => new {x.CartID, x.SKU});
-            
+            builder.Entity<CartItem>().HasKey(x => new { x.CartID, x.SKU });
+
         }
     }
 }

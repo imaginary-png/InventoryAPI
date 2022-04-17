@@ -1,16 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Principal;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace InventoryAPI.Models
 {
-    public class Customer :IdentityUser
+    public class Customer : IdentityUser
     {
-       /* [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Key, Required]
-        public string CustomerID { get; set; }*/
+        /* [DatabaseGenerated(DatabaseGeneratedOption.None)]
+         [Key, Required]
+         public string CustomerID { get; set; }*/
 
         public string Name { get; set; }
 

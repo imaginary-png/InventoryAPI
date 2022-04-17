@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using System.Linq;
-using System.Threading.Tasks;
-using InventoryAPI.Data;
-using InventoryAPI.Models.DTO;
+﻿using InventoryAPI.Data;
 using InventoryAPI.Models.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace InventoryAPI.Models.Repository
 {
@@ -39,7 +36,7 @@ namespace InventoryAPI.Models.Repository
         {
             var item = await ItemExists(skuToDelete);
 
-            if (item != null) 
+            if (item != null)
             {
                 _context.Inventory.Remove(item);
                 await _context.SaveChangesAsync();
@@ -59,7 +56,7 @@ namespace InventoryAPI.Models.Repository
                 item.Description = itemToUpdate.Description;
                 item.Price = itemToUpdate.Price;
                 item.Stock = itemToUpdate.Stock;
-                
+
                 _context.Inventory.Update(item);
                 await _context.SaveChangesAsync();
                 return true;

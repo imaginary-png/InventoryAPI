@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InventoryAPI.Models;
+﻿using InventoryAPI.Models;
 using InventoryAPI.Models.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace InventoryAPI.Controllers.Admin
 {
@@ -36,7 +32,7 @@ namespace InventoryAPI.Controllers.Admin
         {
             if (await _repo.Add(itemToAdd))
             {
-                return Created("",itemToAdd);
+                return Created("", itemToAdd);
             }
 
             return Conflict();
@@ -55,7 +51,7 @@ namespace InventoryAPI.Controllers.Admin
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody]InventoryItem itemToUpdate)
+        public async Task<IActionResult> Update([FromBody] InventoryItem itemToUpdate)
         {
             if (await _repo.Update(itemToUpdate))
             {

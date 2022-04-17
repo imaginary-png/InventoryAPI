@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Threading.Tasks;
-using InventoryAPI.Data;
+﻿using InventoryAPI.Data;
 using InventoryAPI.JWT_Handler;
 using InventoryAPI.Models.DTO;
 using InventoryAPI.Models.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
 
 namespace InventoryAPI.Models.Repository
 {
@@ -22,20 +21,21 @@ namespace InventoryAPI.Models.Repository
             _userManager = userManager;
             _jwtHandler = jwtHandler;
         }
-        
+
 
         public async Task<AuthResponseDto> Login(LoginDto userLogin)
         {
             var user = await _userManager.FindByEmailAsync(userLogin.Email);
 
-            if (user == null) 
+            if (user == null)
                 return new AuthResponseDto
                 {
                     IsAuthSuccessful = false,
                     errors = new Dictionary<string, List<string>>
                     {
                         {"Login", new List<string>{"Incorrect login details", $"Username: {userLogin.Email}"}}
-                    }};
+                    }
+                };
 
             if (!await _userManager.CheckPasswordAsync(user, userLogin.Password))
             {
@@ -53,7 +53,7 @@ namespace InventoryAPI.Models.Repository
             var claims = await _jwtHandler.GetClaims(user);
             var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            
+
             return new AuthResponseDto { IsAuthSuccessful = true, Token = token };
         }
     }

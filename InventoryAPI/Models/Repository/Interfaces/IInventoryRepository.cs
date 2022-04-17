@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using InventoryAPI.Models.DTO;
 
 namespace InventoryAPI.Models.Repository.Interfaces
 {

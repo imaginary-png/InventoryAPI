@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using InventoryAPI.Models.DTO;
-using Microsoft.AspNetCore.Identity;
+﻿using InventoryAPI.Models.DTO;
+using System.Threading.Tasks;
 
 namespace InventoryAPI.Models.Repository.Interfaces
 {
