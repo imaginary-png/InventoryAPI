@@ -27,14 +27,14 @@ namespace InventoryAPI.Models
     {
         [ForeignKey("Cart"), Required, JsonIgnore]
         public string CartID { get; set; }
-        [JsonIgnore] public virtual Cart Cart { get; set; }
 
         [ForeignKey("InventoryItem"), Required]
         public string SKU { get; set; }
 
-        [JsonIgnore]
-        public virtual InventoryItem InventoryItem { get; set; }
-
         public int Quantity { get; set; }
+
+        [JsonIgnore] public virtual Cart Cart { get; set; }
+
+        [JsonIgnore] public virtual InventoryItem InventoryItem { get; set; }
     }
 }

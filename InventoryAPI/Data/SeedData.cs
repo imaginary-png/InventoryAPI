@@ -102,6 +102,8 @@ namespace InventoryAPI.Data
             #endregion
 
 
+            #region Adding Inventory
+
             context.Inventory.AddRange(
                 new InventoryItem
                 {
@@ -177,6 +179,25 @@ namespace InventoryAPI.Data
                 }
             );
 
+
+            #endregion
+
+            context.Carts.AddRange(
+                new Cart
+                {
+                    CartID = "CART1000",
+                    UserID = "CUST1000"
+                },
+                new Cart
+                {
+                    CartID = "CART1001",
+                    UserID = "CUST1001",
+                },
+                new Cart
+                {
+                    CartID = "ADMINCART1000",
+                    UserID = "ADMIN1000"
+                });
             context.SaveChanges();
         }
     }

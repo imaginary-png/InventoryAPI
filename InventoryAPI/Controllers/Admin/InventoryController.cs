@@ -19,13 +19,16 @@ namespace InventoryAPI.Controllers.Admin
         }
 
 
-        [HttpGet]
+        [HttpGet("/api/[controller]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             var results = await _repo.Get();
             return Ok(results);
         }
 
+
+        #region Admin Endpoints
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] InventoryItem itemToAdd)
@@ -60,5 +63,7 @@ namespace InventoryAPI.Controllers.Admin
 
             return NotFound();
         }
+
+        #endregion
     }
 }

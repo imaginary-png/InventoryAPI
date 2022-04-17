@@ -37,7 +37,8 @@ namespace InventoryAPI.JWT_Handler
         {
             var claims = new List<Claim>
             {
-            new Claim(ClaimTypes.Name, user.Id)
+            new Claim(ClaimTypes.Name, user.Id),
+            new Claim(ClaimTypes.NameIdentifier, user.Id) //apparently NameIdentifier should be used for user id instead of name
             };
 
             //add roles
